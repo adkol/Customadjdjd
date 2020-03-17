@@ -35,8 +35,9 @@ public class MainActivity extends FragmentActivity {
     SharedPreferences.Editor editor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setContentView(R.layout.activity_main);
+
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
         radio = (RadioGroup) findViewById(R.id.radiogrou);
         pref= getApplicationContext().getSharedPreferences("MyPref", 0);
         editor = pref.edit();
@@ -82,15 +83,5 @@ public class MainActivity extends FragmentActivity {
 
 
 
-
-}
-class ArticleFragment extends Fragment {
-    // The onCreateView method is called when Fragment should create its View object hierarchy,
-    // either dynamically or via XML layout inflation.
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-        // Defines the xml file for the fragment
-        return inflater.inflate(R.layout.fragment, parent, false);
-    }
 
 }
