@@ -17,6 +17,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
@@ -24,7 +25,7 @@ import com.google.gson.Gson;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends YouTubeBaseActivity {
     String videoID;
     TextView Text;
     Map<String,String> qa;
@@ -32,7 +33,7 @@ public class MainActivity extends FragmentActivity {
     Button sub;
     EditText responseText;
     TextView displayText;
-    TextView qText;
+    TextView thank;
     RadioGroup radio;
     YouTubePlayerView mYouTubePlayerView;
     YouTubePlayer.OnInitializedListener mOnInitial;
@@ -44,10 +45,10 @@ public class MainActivity extends FragmentActivity {
 
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_main);
-
-//        mYouTubePlayerView=findViewById(R.id.view);
-
+        setContentView(R.layout.fragment);
+        thank=findViewById(R.id.thank);
+        mYouTubePlayerView=findViewById(R.id.view);
+        mYouTubePlayerView.setVisibility(View.GONE);
         radio = (RadioGroup) findViewById(R.id.radiogrou);
         pref= getApplicationContext().getSharedPreferences("MyPref", 0);
         editor = pref.edit();
@@ -129,19 +130,21 @@ public class MainActivity extends FragmentActivity {
         json=json.substring(9,json.length()-2);
         json="MVP Favorite: "+json;
         Text.setText(json);
+        thank.setText(("Thank you for voting"));
+        mYouTubePlayerView.setVisibility(View.VISIBLE);
+        mOnInitial= new YouTubePlayer.OnInitializedListener() {
+            @Override
+            public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
+                System.out.println(videoID);
+                youTubePlayer.loadVideo(videoID);
+            }
 
-//        mOnInitial= new YouTubePlayer.OnInitializedListener() {
-//            @Override
-//            public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
-//                youTubePlayer.loadVideo(videoID);
-//            }
-//
-//            @Override
-//            public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
-//
-//            }
-//        };
-//        mYouTubePlayerView.initialize(YouTubeConfig.getApiKey(),mOnInitial);
+            @Override
+            public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
+
+            }
+        };
+        mYouTubePlayerView.initialize(YouTubeConfig.getApiKey(),mOnInitial);
             }
 
 public class Person{

@@ -11,7 +11,13 @@
         android:id="@+id/fooFragment"
         android:name="com.kolliadit.customapp.ArticleFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="448dp" />
+
+    <fragment
+        android:id="@+id/Fragment"
+        android:name="com.kolliadit.customapp.Article2"
+        android:layout_width="match_parent"
+        android:layout_height="281dp" />
 
 <!--    <view-->
 <!--        android:id="@+id/view"-->
