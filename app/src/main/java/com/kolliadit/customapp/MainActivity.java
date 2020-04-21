@@ -46,9 +46,11 @@ public class MainActivity extends YouTubeBaseActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.fragment);
-        thank=findViewById(R.id.thank);
         mYouTubePlayerView=findViewById(R.id.view);
         mYouTubePlayerView.setVisibility(View.GONE);
+        thank=findViewById(R.id.thank);
+
+
         radio = (RadioGroup) findViewById(R.id.radiogrou);
         pref= getApplicationContext().getSharedPreferences("MyPref", 0);
         editor = pref.edit();
@@ -144,6 +146,7 @@ public class MainActivity extends YouTubeBaseActivity {
 
             }
         };
+
         mYouTubePlayerView.initialize(YouTubeConfig.getApiKey(),mOnInitial);
             }
 
