@@ -134,7 +134,9 @@ public class MainActivity extends YouTubeBaseActivity {
         Text.setText(json);
         thank.setText(("Thank you for voting"));
         mYouTubePlayerView.setVisibility(View.VISIBLE);
+        mOnInitial=null;
         mOnInitial= new YouTubePlayer.OnInitializedListener() {
+
             @Override
             public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
                 System.out.println(videoID);
@@ -143,11 +145,12 @@ public class MainActivity extends YouTubeBaseActivity {
 
             @Override
             public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
-
+                System.out.println("Fail"+videoID);
             }
         };
-
+        mYouTubePlayerView=findViewById(R.id.view);
         mYouTubePlayerView.initialize(YouTubeConfig.getApiKey(),mOnInitial);
+
             }
 
 public class Person{
